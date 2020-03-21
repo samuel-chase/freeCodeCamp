@@ -1,6 +1,6 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
-const Sentry = require('@sentry/node');
+
 const _ = require('lodash');
 const Rx = require('rx');
 const loopback = require('loopback');
@@ -9,24 +9,8 @@ const expressState = require('express-state');
 const createDebugger = require('debug');
 
 const { setupPassport } = require('./component-passport');
-const { isHandledError } = require('./utils/create-handled-error.js');
-const { sentry } = require('../../config/secrets');
 
 const log = createDebugger('fcc:server');
-
-if (sentry.dns === 'dsn_from_sentry_dashboard') {
-  log('Sentry reporting disabled unless DSN is provided.');
-} else {
-  Sentry.init({
-    dsn: sentry.dns,
-    beforeSend(event, hint) {
-      log('REPORTING TO SENTRY', hint.originalException.message);
-      log('ishandled?', isHandledError(hint.originalException));
-      return null;
-      // return isHandledError(hint.originalException) ? null : event;
-    }
-  });
-}
 
 // force logger to always output
 // this may be brittle
