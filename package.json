@@ -1,5 +1,6 @@
 {
   "name": "@freecodecamp/freecodecamp",
+  "author": "Samuel Chase",
   "private": true,
   "version": "0.0.1",
   "scripts": {
