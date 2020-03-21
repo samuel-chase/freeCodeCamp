@@ -15,8 +15,10 @@ export default function attachSentry() {
         log('REPORTING TO SENTRY', hint.originalException.message);
         log('EVENT', event);
         log('ishandled?', isHandledError(hint.originalException));
-        // return null;
-        return isHandledError(hint.originalException) ? null : event;
+        // DEBUG: returning null stops the event from being reported to Sentry
+        return null;
+        // DEBUG: use the next return to send to Sentry
+        // return isHandledError(hint.originalException) ? null : event;
       }
     });
   }
