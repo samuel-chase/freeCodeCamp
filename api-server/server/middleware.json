@@ -59,7 +59,6 @@
   },
   "files": {},
   "final:after": {
-    "./middlewares/error-reporter": {},
     "./middlewares/error-handlers": {},
     "strong-error-handler": {
       "params": {
